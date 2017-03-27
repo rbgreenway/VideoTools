@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9DF4474F-AA4B-4A0D-8ABD-1641CCA158B5}</ProjectGuid>
+    <RootNamespace>vglib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OpenCV)\include;$(DXSDK_DIR)/include;$(Bento4)\include;%(AdditionalIncludeDirectories);C:\Program Files (x86)\Visual Leak Detector\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OpenCV)\include;$(DXSDK_DIR)/include;$(Bento4)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cuda.lib;cudart.lib;nvcuvid.lib;Bento4d.lib;vfw32.lib;opencv_core310d.lib;opencv_cudaarithm310d.lib;opencv_cudabgsegm310d.lib;opencv_cudacodec310d.lib;opencv_cudafeatures2d310d.lib;opencv_cudafilters310d.lib;opencv_cudaimgproc310d.lib;opencv_cudalegacy310d.lib;opencv_cudaobjdetect310d.lib;opencv_cudaoptflow310d.lib;opencv_cudastereo310d.lib;opencv_cudawarping310d.lib;opencv_cudev310d.lib;opencv_features2d310d.lib;opencv_flann310d.lib;opencv_highgui310d.lib;opencv_imgcodecs310d.lib;opencv_imgproc310d.lib;opencv_ml310d.lib;opencv_objdetect310d.lib;opencv_photo310d.lib;opencv_shape310d.lib;opencv_stitching310d.lib;opencv_superres310d.lib;opencv_video310d.lib;opencv_videoio310d.lib;opencv_videostab310d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OpenCV)\x64\vc12\lib;$(OpenCV)\x64\vc12\bin;$(DXSDK_DIR)/Lib/$(PlatformName);$(BENTO4_DIR)\x64\VS2013\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <CodeGeneration>compute_30,sm_30</CodeGeneration>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
+copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CudaCompile Include="cuda\vicuda.cu" />
+    <CudaCompile Include="jpeg\src\gpujpeg_dct_gpu.cu" />
+    <CudaCompile Include="jpeg\src\gpujpeg_huffman_gpu_decoder.cu" />
+    <CudaCompile Include="jpeg\src\gpujpeg_huffman_gpu_encoder.cu" />
+    <CudaCompile Include="jpeg\src\gpujpeg_preprocessor.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aviwriter.h" />
+    <ClInclude Include="bento4\include\Ap4.h" />
+    <ClInclude Include="bento4\include\Ap48bdlAtom.h" />
+    <ClInclude Include="bento4\include\Ap4AdtsParser.h" />
+    <ClInclude Include="bento4\include\Ap4AesBlockCipher.h" />
+    <ClInclude Include="bento4\include\Ap4AinfAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Array.h" />
+    <ClInclude Include="bento4\include\Ap4Atom.h" />
+    <ClInclude Include="bento4\include\Ap4AtomFactory.h" />
+    <ClInclude Include="bento4\include\Ap4AtomixAdapters.h" />
+    <ClInclude Include="bento4\include\Ap4AtomSampleTable.h" />
+    <ClInclude Include="bento4\include\Ap4AvccAtom.h" />
+    <ClInclude Include="bento4\include\Ap4AvcParser.h" />
+    <ClInclude Include="bento4\include\Ap4BitStream.h" />
+    <ClInclude Include="bento4\include\Ap4BlocAtom.h" />
+    <ClInclude Include="bento4\include\Ap4ByteStream.h" />
+    <ClInclude Include="bento4\include\Ap4Co64Atom.h" />
+    <ClInclude Include="bento4\include\Ap4Command.h" />
+    <ClInclude Include="bento4\include\Ap4CommandFactory.h" />
+    <ClInclude Include="bento4\include\Ap4CommonEncryption.h" />
+    <ClInclude Include="bento4\include\Ap4Config.h" />
+    <ClInclude Include="bento4\include\Ap4Constants.h" />
+    <ClInclude Include="bento4\include\Ap4ContainerAtom.h" />
+    <ClInclude Include="bento4\include\Ap4CttsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4DataBuffer.h" />
+    <ClInclude Include="bento4\include\Ap4Debug.h" />
+    <ClInclude Include="bento4\include\Ap4Dec3Atom.h" />
+    <ClInclude Include="bento4\include\Ap4DecoderConfigDescriptor.h" />
+    <ClInclude Include="bento4\include\Ap4DecoderSpecificInfoDescriptor.h" />
+    <ClInclude Include="bento4\include\Ap4Descriptor.h" />
+    <ClInclude Include="bento4\include\Ap4DescriptorFactory.h" />
+    <ClInclude Include="bento4\include\Ap4DrefAtom.h" />
+    <ClInclude Include="bento4\include\Ap4DynamicCast.h" />
+    <ClInclude Include="bento4\include\Ap4ElstAtom.h" />
+    <ClInclude Include="bento4\include\Ap4EsDescriptor.h" />
+    <ClInclude Include="bento4\include\Ap4EsdsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Expandable.h" />
+    <ClInclude Include="bento4\include\Ap4File.h" />
+    <ClInclude Include="bento4\include\Ap4FileByteStream.h" />
+    <ClInclude Include="bento4\include\Ap4FileCopier.h" />
+    <ClInclude Include="bento4\include\Ap4FileWriter.h" />
+    <ClInclude Include="bento4\include\Ap4FragmentSampleTable.h" />
+    <ClInclude Include="bento4\include\Ap4FrmaAtom.h" />
+    <ClInclude Include="bento4\include\Ap4FtypAtom.h" />
+    <ClInclude Include="bento4\include\Ap4GrpiAtom.h" />
+    <ClInclude Include="bento4\include\Ap4HdlrAtom.h" />
+    <ClInclude Include="bento4\include\Ap4HevcParser.h" />
+    <ClInclude Include="bento4\include\Ap4HintTrackReader.h" />
+    <ClInclude Include="bento4\include\Ap4Hmac.h" />
+    <ClInclude Include="bento4\include\Ap4HmhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4HvccAtom.h" />
+    <ClInclude Include="bento4\include\Ap4IkmsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Interfaces.h" />
+    <ClInclude Include="bento4\include\Ap4IodsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Ipmp.h" />
+    <ClInclude Include="bento4\include\Ap4IproAtom.h" />
+    <ClInclude Include="bento4\include\Ap4IsfmAtom.h" />
+    <ClInclude Include="bento4\include\Ap4IsltAtom.h" />
+    <ClInclude Include="bento4\include\Ap4IsmaCryp.h" />
+    <ClInclude Include="bento4\include\Ap4KeyWrap.h" />
+    <ClInclude Include="bento4\include\Ap4LinearReader.h" />
+    <ClInclude Include="bento4\include\Ap4List.h" />
+    <ClInclude Include="bento4\include\Ap4Marlin.h" />
+    <ClInclude Include="bento4\include\Ap4MdhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4MehdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4MetaData.h" />
+    <ClInclude Include="bento4\include\Ap4MfhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4MfroAtom.h" />
+    <ClInclude Include="bento4\include\Ap4MoovAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Movie.h" />
+    <ClInclude Include="bento4\include\Ap4MovieFragment.h" />
+    <ClInclude Include="bento4\include\Ap4Mp4AudioInfo.h" />
+    <ClInclude Include="bento4\include\Ap4Mpeg2Ts.h" />
+    <ClInclude Include="bento4\include\Ap4MvhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4NalParser.h" />
+    <ClInclude Include="bento4\include\Ap4NeptuneAdapters.h" />
+    <ClInclude Include="bento4\include\Ap4NmhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4ObjectDescriptor.h" />
+    <ClInclude Include="bento4\include\Ap4OdafAtom.h" />
+    <ClInclude Include="bento4\include\Ap4OddaAtom.h" />
+    <ClInclude Include="bento4\include\Ap4OdheAtom.h" />
+    <ClInclude Include="bento4\include\Ap4OhdrAtom.h" />
+    <ClInclude Include="bento4\include\Ap4OmaDcf.h" />
+    <ClInclude Include="bento4\include\Ap4PdinAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Piff.h" />
+    <ClInclude Include="bento4\include\Ap4Processor.h" />
+    <ClInclude Include="bento4\include\Ap4Protection.h" />
+    <ClInclude Include="bento4\include\Ap4PsshAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Results.h" />
+    <ClInclude Include="bento4\include\Ap4RtpAtom.h" />
+    <ClInclude Include="bento4\include\Ap4RtpHint.h" />
+    <ClInclude Include="bento4\include\Ap4SaioAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SaizAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Sample.h" />
+    <ClInclude Include="bento4\include\Ap4SampleDescription.h" />
+    <ClInclude Include="bento4\include\Ap4SampleEntry.h" />
+    <ClInclude Include="bento4\include\Ap4SampleSource.h" />
+    <ClInclude Include="bento4\include\Ap4SampleTable.h" />
+    <ClInclude Include="bento4\include\Ap4SbgpAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SchmAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SdpAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SegmentBuilder.h" />
+    <ClInclude Include="bento4\include\Ap4SencAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SgpdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SidxAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SLConfigDescriptor.h" />
+    <ClInclude Include="bento4\include\Ap4SmhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4StcoAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SthdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4StreamCipher.h" />
+    <ClInclude Include="bento4\include\Ap4String.h" />
+    <ClInclude Include="bento4\include\Ap4StscAtom.h" />
+    <ClInclude Include="bento4\include\Ap4StsdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4StssAtom.h" />
+    <ClInclude Include="bento4\include\Ap4StszAtom.h" />
+    <ClInclude Include="bento4\include\Ap4SttsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Stz2Atom.h" />
+    <ClInclude Include="bento4\include\Ap4SyntheticSampleTable.h" />
+    <ClInclude Include="bento4\include\Ap4TencAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TfdtAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TfhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TfraAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TimsAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TkhdAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Track.h" />
+    <ClInclude Include="bento4\include\Ap4TrakAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TrefTypeAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TrexAtom.h" />
+    <ClInclude Include="bento4\include\Ap4TrunAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Types.h" />
+    <ClInclude Include="bento4\include\Ap4UrlAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Utils.h" />
+    <ClInclude Include="bento4\include\Ap4UuidAtom.h" />
+    <ClInclude Include="bento4\include\Ap4Version.h" />
+    <ClInclude Include="bento4\include\Ap4VmhdAtom.h" />
+    <ClInclude Include="bento4\include\Bento4C.h" />
+    <ClInclude Include="CircularFifoCpu.h" />
+    <ClInclude Include="CircularFifoGpu.h" />
+    <ClInclude Include="CircularFifoInput.h" />
+    <ClInclude Include="CircularFifoOutput.h" />
+    <ClInclude Include="cudautil.h" />
+    <ClInclude Include="diagnostics.h" />
+    <ClInclude Include="drvapi_error_string.h" />
+    <ClInclude Include="exception.h" />
+    <ClInclude Include="framequeue.h" />
+    <ClInclude Include="gpumatfifo.h" />
+    <ClInclude Include="GpuTimer.h" />
+    <ClInclude Include="helper_cuda.h" />
+    <ClInclude Include="helper_cuda_drvapi.h" />
+    <ClInclude Include="helper_functions.h" />
+    <ClInclude Include="helper_image.h" />
+    <ClInclude Include="helper_string.h" />
+    <ClInclude Include="helper_timer.h" />
+    <ClInclude Include="jpeg\include\gpujpeg.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_colorspace.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_common.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_common_internal.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_dct_cpu.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_dct_gpu.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_decoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_decoder_internal.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_encoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_encoder_internal.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_huffman_cpu_decoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_huffman_cpu_encoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_huffman_gpu_decoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_huffman_gpu_encoder.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_preprocessor.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_reader.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_table.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_type.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_util.h" />
+    <ClInclude Include="jpeg\include\gpujpeg_writer.h" />
+    <ClInclude Include="misc.h" />
+    <ClInclude Include="mp4writer.h" />
+    <ClInclude Include="nvenc\nvCPUOPSys.h" />
+    <ClInclude Include="nvenc\nvEncodeAPI.h" />
+    <ClInclude Include="nvenc\nvFileIO.h" />
+    <ClInclude Include="nvenc\NvHWEncoder.h" />
+    <ClInclude Include="nvenc\nvUtils.h" />
+    <ClInclude Include="samplefilestorage.h" />
+    <ClInclude Include="systemstate.h" />
+    <ClInclude Include="vglib.h" />
+    <ClInclude Include="vicuda.h" />
+    <ClInclude Include="videodecoder.h" />
+    <ClInclude Include="videoencoder.h" />
+    <ClInclude Include="videosink.h" />
+    <ClInclude Include="videosink_avi.h" />
+    <ClInclude Include="videosink_mp4.h" />
+    <ClInclude Include="videosink_outputqueue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aviwriter.cpp" />
+    <ClCompile Include="CircularFifoCpu.cpp" />
+    <ClCompile Include="CircularFifoGpu.cpp" />
+    <ClCompile Include="CircularFifoInput.cpp" />
+    <ClCompile Include="CircularFifoOutput.cpp" />
+    <ClCompile Include="cudautil.cpp" />
+    <ClCompile Include="diagnostics.cpp" />
+    <ClCompile Include="framequeue.cpp" />
+    <ClCompile Include="gpumatfifo.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_common.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_dct_cpu.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_decoder.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_encoder.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_huffman_cpu_decoder.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_huffman_cpu_encoder.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_reader.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_table.cpp" />
+    <ClCompile Include="jpeg\src\gpujpeg_writer.cpp" />
+    <ClCompile Include="mp4writer.cpp" />
+    <ClCompile Include="nvenc\NvHWEncoder.cpp" />
+    <ClCompile Include="samplefilestorage.cpp" />
+    <ClCompile Include="systemstate.cpp" />
+    <ClCompile Include="vglib.cpp" />
+    <ClCompile Include="videodecoder.cpp" />
+    <ClCompile Include="videoencoder.cpp" />
+    <ClCompile Include="videosink.cpp" />
+    <ClCompile Include="videosink_avi.cpp" />
+    <ClCompile Include="videosink_mp4.cpp" />
+    <ClCompile Include="videosink_outputqueue.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.targets" />
+  </ImportGroup>
+</Project>
