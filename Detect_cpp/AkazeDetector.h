@@ -19,7 +19,6 @@
 
 using namespace std;
 using namespace cv;
-using namespace cv::xfeatures2d;
 
 
 struct AKAZEDetector
