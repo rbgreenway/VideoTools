@@ -63,7 +63,8 @@ double TemplateMatcher::CalculateImageCorrelation(uint8_t *testImageData)
 
 		/// Do the Matching and Normalize
 		matchTemplate(roiTestMat, m_roiRefMat, result, match_method);
-		normalize(result, result, 0, 1, NORM_MINMAX, -1, Mat());
+		//normalize(result, result, 0, 1, NORM_MINMAX, -1, Mat());
+		
 
 
 		/// Localizing the best match with minMaxLoc
